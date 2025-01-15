@@ -736,8 +736,6 @@ app.get('/api/user-orders', authenticateUserToken, async (req, res) => {
   }
 });
 
-
-
 // Middleware for admin access
 const authorizeAdmin = (req, res, next) => {
   if (req.user.role !== 'admin') {
@@ -817,7 +815,6 @@ app.get('/api/products/:id', async (req, res) => {
   }
 });
 
-
 // update product
 app.put('/api/products/:id', authenticateToken, authorizeAdmin, async (req, res) => {
   const { id } = req.params;
@@ -862,9 +859,6 @@ app.put('/api/products/:id', authenticateToken, authorizeAdmin, async (req, res)
     res.status(500).json({ message: 'Failed to update product.' });
   }
 });
-
-
-
 
 // delete a product
 app.delete('/api/products/:id', authenticateToken, authorizeAdmin, async (req, res) => {
@@ -1066,9 +1060,6 @@ app.get('/api/orders', authenticateToken, authorizeAdmin, async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch orders.' });
   }
 });
-
-
-
 
 // Update Order Status Endpoint
 app.put('/api/orders/:id', authenticateToken, authorizeAdmin, async (req, res) => {
@@ -1790,7 +1781,7 @@ async function generateUserPDF(orderDetails) {
 
 
 // Start Server
-const PORT = 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
